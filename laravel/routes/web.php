@@ -21,4 +21,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/phones', 'PhoneController');
+Route::resource('/phones', 'PublicController');
+
+// Route::get('/private', 'PrivateController@index')->middleware('auth');
+
+Route::get('phone', 'PublicController@index')->name('public.phone.index'); // index
+
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware('auth')
+    ->group(function () {
+        Route::resource('phone', PhoneController::class);
+    });

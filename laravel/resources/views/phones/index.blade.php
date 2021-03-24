@@ -8,29 +8,31 @@
     </tr>
     </thead>
     <tbody>
-        @foreach($phones as $phone)
+        @foreach($phone as $phone)
             <tr>
                 <th scope="row">{{ $phone->id }}</th>
                 <td>{{ $phone->brand }}</td>
                 <td>{{ $phone->price }} €</td>
                 <td>
 
-                    <a href="">
-                        <i class="far fa-eye"></i>
-                    </a>
+                    @if(Auth::check())
+                        <a href="">
+                            <i class="far fa-eye"></i>
+                        </a>
 
-                    <a href="">
-                        <i class="far fa-edit"></i>
-                    </a>
+                        <a href="">
+                            <i class="far fa-edit"></i>
+                        </a>
 
-                    <form action="{{ route('phones.destroy', compact('phone')) }}" method="post">
-                        @csrf
-                        @method('DELETE')
+                        <form action="{{ route('phones.destroy', compact('phone')) }}" method="post">
+                            @csrf
+                            @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-meteor"></i>
-                        </button>
-                    </form>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-meteor"></i>
+                            </button>
+                        </form>
+                    @endif
 
                 </td>
             </tr>
